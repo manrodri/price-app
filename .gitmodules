@@ -1,0 +1,3 @@
+[submodule "price-of-chair-deployment"]
+	path = price-of-chair-deployment
+	url = git@github.com:manrodri/price-of-chair-deployment.git
