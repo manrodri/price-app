@@ -1,4 +1,4 @@
-ROOT_DATA_DIR='/Users/manuelrodriguez/dev/pricing-service'
+ROOT_DATA_DIR='/Users/manuelrodriguez/dev/PYTHON/price-app'
 DATA_DIR="${ROOT_DATA_DIR}/data"
 export DB_CONNECTION_STRING="mongodb://127.0.0.1:27017/price-app"
 

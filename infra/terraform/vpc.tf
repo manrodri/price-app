@@ -12,10 +12,10 @@ module "vpc" {
   enable_vpn_gateway = true
 
   default_vpc_enable_dns_hostnames = true
-  default_vpc_enable_dns_support = true
+  default_vpc_enable_dns_support   = true
 
   tags = {
     Environment = "dev"
-    Team = "DevOps"
+    Team        = "DevOps"
   }
 }

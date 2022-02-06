@@ -1,6 +1,9 @@
 variable "project_name" {
   type = string
-  default = "price-app"
+}
+
+variable "domain_name" {
+  type = string
 }
 
 variable "subnet_count" {
@@ -13,4 +16,8 @@ variable "private_subnets" {
 
 variable "public_subnets" {
   type = list(string)
+}
+
+variable "common_tags" {
+  type = map(string)
 }
