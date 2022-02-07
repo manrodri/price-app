@@ -10,3 +10,4 @@ infa/terraform/.terraform/
 .idea/modules.xml
 .idea/price-app.iml
 .idea/vcs.xml
+data/

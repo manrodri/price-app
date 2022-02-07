@@ -7,8 +7,8 @@ resource "aws_acm_certificate" "myapp" {
   }
 }
 
-# This tells terraform to cause the route53 validation to happen
-resource "aws_acm_certificate_validation" "cert" {
-  certificate_arn         = aws_acm_certificate.myapp.arn
-  validation_record_fqdns = [aws_route53_record.cert_validation.fqdn]
-}
+//# This tells terraform to cause the route53 validation to happen
+//resource "aws_acm_certificate_validation" "cert" {
+//  certificate_arn         = aws_acm_certificate.myapp.arn
+//  validation_record_fqdns = [aws_route53_record.cert_validation.fqdn]
+//}

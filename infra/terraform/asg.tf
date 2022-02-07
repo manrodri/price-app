@@ -3,22 +3,20 @@ resource "aws_launch_configuration" "webapp_lc" {
     create_before_destroy = true
   }
 
-  name_prefix   = "${var.project_name}-lc-"
-  image_id      = data.aws_ami.aws_linux.id
-  instance_type = local.asg_instance_size
+  name_prefix   = "${terraform.workspace}-demo-lc"
+  image_id      = data.aws_ami.ubuntu.image_id
+  instance_type = var.asg_instance_size[terraform.workspace]
+  key_name = var.key
 
   security_groups = [
     aws_security_group.webapp_http_inbound_sg.id,
     aws_security_group.webapp_ssh_inbound_sg.id,
-    aws_security_group.webapp_outbound_sg.id,
+    aws_security_group.webapp_https_inbound_sg.id
   ]
 
   user_data                   = file("./templates/userdata.sh")
   associate_public_ip_address = true
-  iam_instance_profile        = aws_iam_instance_profile.asg.name
 }
-
-
 
 resource "aws_autoscaling_group" "webapp_asg" {
   lifecycle {
@@ -26,10 +24,10 @@ resource "aws_autoscaling_group" "webapp_asg" {
   }
 
   vpc_zone_identifier   = module.vpc.public_subnets
-  name                  = "${var.project_name}_asg-${terraform.workspace}"
-  max_size              = local.asg_max_size
-  min_size              = local.asg_min_size
-  wait_for_elb_capacity = local.asg_min_size
+  name                  = "demo_webapp_asg-${terraform.workspace}"
+  max_size              = var.asg_max_size[terraform.workspace]
+  min_size              = var.asg_min_size[terraform.workspace]
+  wait_for_elb_capacity = var.asg_min_size[terraform.workspace]
   force_delete          = true
   launch_configuration  = aws_launch_configuration.webapp_lc.id
 
@@ -43,12 +41,21 @@ resource "aws_autoscaling_group" "webapp_asg" {
   }
 }
 
+resource "aws_autoscaling_attachment" "webapp_asg_attachment" {
+  autoscaling_group_name = aws_autoscaling_group.webapp_asg.id
+  alb_target_group_arn = aws_alb_target_group.webapp_alb_tg.arn
+}
+
+
+######################
+# autoscaling policies
+#######################
 
 #
 # Scale Up Policy and Alarm
 #
 resource "aws_autoscaling_policy" "scale_up" {
-  name                   = "ddt_asg_scale_up-${terraform.workspace}"
+  name                   = "demo_asg_scale_up-${terraform.workspace}"
   scaling_adjustment     = 2
   adjustment_type        = "ChangeInCapacity"
   cooldown               = 300
@@ -56,7 +63,7 @@ resource "aws_autoscaling_policy" "scale_up" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "scale_up_alarm" {
-  alarm_name                = "ddt-high-asg-cpu-${terraform.workspace}"
+  alarm_name                = "demo-high-asg-cpu-${terraform.workspace}"
   comparison_operator       = "GreaterThanThreshold"
   evaluation_periods        = "2"
   metric_name               = "CPUUtilization"
@@ -78,7 +85,7 @@ resource "aws_cloudwatch_metric_alarm" "scale_up_alarm" {
 # Scale Down Policy and Alarm
 #
 resource "aws_autoscaling_policy" "scale_down" {
-  name                   = "ddt_asg_scale_down-${terraform.workspace}"
+  name                   = "demo_asg_scale_down-${terraform.workspace}"
   scaling_adjustment     = -1
   adjustment_type        = "ChangeInCapacity"
   cooldown               = 600
@@ -86,7 +93,7 @@ resource "aws_autoscaling_policy" "scale_down" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "scale_down_alarm" {
-  alarm_name                = "ddt-low-asg-cpu-${terraform.workspace}"
+  alarm_name                = "demo-low-asg-cpu-${terraform.workspace}"
   comparison_operator       = "LessThanThreshold"
   evaluation_periods        = "5"
   metric_name               = "CPUUtilization"

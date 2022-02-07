@@ -1,21 +1,24 @@
+##################################################################################
+# RESOURCES
+##################################################################################
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "~>2.0"
 
-  name = "${var.project_name}-vpc"
-  cidr = "10.0.0.0/16"
+  name = "${local.common_tags["project_name"]}-${terraform.workspace}}"
 
-  azs             = slice(data.aws_availability_zones.available.names, 0, var.subnet_count)
-  private_subnets = var.private_subnets
-  public_subnets  = var.public_subnets
+  cidr            = var.cidr_block[terraform.workspace]
+  azs             = slice(data.aws_availability_zones.available.names, 0, var.subnet_count[terraform.workspace]) // slice extracts some consecutive elements from within a list. slice(list, startindex, endindex)
+  private_subnets = var.private_subnets[terraform.workspace]
+  public_subnets  = var.public_subnets[terraform.workspace]
 
-  enable_nat_gateway = true
-  enable_vpn_gateway = true
+  enable_nat_gateway = false
 
-  default_vpc_enable_dns_hostnames = true
-  default_vpc_enable_dns_support   = true
+  enable_dns_hostnames = true
+  enable_dns_support   = true
 
-  tags = {
-    Environment = "dev"
-    Team        = "DevOps"
-  }
+  create_database_subnet_group = false
+
+
+  tags = local.common_tags
 }

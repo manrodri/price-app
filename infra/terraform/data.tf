@@ -2,14 +2,29 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
+########
+# DNS
+#######
+data "aws_route53_zone" "public" {
+  name         = var.demo_dns_zone
+  private_zone = false
 
-data "aws_ami" "aws_linux" {
+}
+
+
+data "aws_key_pair" "example" {
+  key_name = "test-key"
+
+}
+
+
+data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["amazon"]
+  owners      = ["099720109477"]
 
   filter {
     name   = "name"
-    values = ["amzn-ami-hvm-20*"]
+    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server*"]
   }
 
   filter {

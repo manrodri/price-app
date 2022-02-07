@@ -1,23 +1,73 @@
-variable "project_name" {
-  type = string
+variable "profile" {
+  type    = string
+  default = "devops"
+}
+variable "region" {
+  type    = string
+  default = "eu-west-1"
 }
 
-variable "domain_name" {
-  type = string
+// networking
+variable "cidr_block" {
+  type = map(string)
 }
 
 variable "subnet_count" {
-  type = number
+  type = map(number)
 }
 
 variable "private_subnets" {
-  type = list(string)
+  type = map(list(string))
 }
 
 variable "public_subnets" {
-  type = list(string)
+  type = map(list(string))
 }
 
-variable "common_tags" {
+######
+# dns
+######
+variable "demo_dns_zone" {
+  type = string
+  default = "soydecai.xyz"
+
+}
+
+variable "demo_dns_name" {
+  type = string
+  default = "myapp"
+}
+
+
+
+####
+# compute
+####
+
+variable "ip_range" {
+  default = "0.0.0.0/0"
+}
+
+variable "asg_instance_size" {
   type = map(string)
+}
+
+variable "asg_max_size" {
+  type = map(number)
+}
+variable "asg_min_size" {
+  type = map(number)
+}
+
+variable "key" {
+  type = string
+}
+
+
+locals {
+  common_tags = {
+    environment  = terraform.workspace
+    team         = "Cloud and Hosting"
+    project_name = "demo-project"
+  }
 }

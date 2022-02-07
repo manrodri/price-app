@@ -37,7 +37,7 @@ resource "aws_security_group" "webapp_ssh_inbound_sg" {
 
   vpc_id = module.vpc.vpc_id
 
-  tags = merge(var.common_tags, {
+  tags = merge(local.common_tags, {
     Name = "terraform_demo_webapp_ssh_inbound"
   })
 }
