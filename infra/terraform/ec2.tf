@@ -9,8 +9,23 @@ resource "aws_instance" "nginx" {
   iam_instance_profile   = aws_iam_instance_profile.nginx_profile.name
   depends_on             = [aws_iam_role_policy.allow_s3_all]
 
-  user_data                   = file("./templates/userdata.sh")
+  connection {
+    type        = "ssh"
+    host        = self.public_ip
+    user        = "ubuntu"
+    private_key = file(var.private_key_path)
 
+  }
+
+  provisioner "file" {
+    source = "templates/mongo.sh"
+    destination = "/home/ubuntu/mongo.sh"
+  }
+
+   provisioner "file" {
+    source = "templates/price-app.sh"
+    destination = "/home/ubuntu/price-app.sh"
+  }
 
   tags = merge(local.common_tags, { Name = "${local.common_tags.Environment}-nginx${count.index + 1}" })
 }

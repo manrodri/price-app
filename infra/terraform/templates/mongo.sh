@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Install mongo
 
 wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
@@ -15,10 +16,3 @@ echo "mongodb-org-tools hold" | sudo dpkg --set-selections
 
 
 sudo systemctl enable --now mongod
-
-
-## Install python, pipenv and nginx
-
-
-
-
