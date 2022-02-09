@@ -8,14 +8,14 @@ module "vpc" {
   private_subnets = var.private_subnets
   public_subnets  = var.public_subnets
 
-  enable_nat_gateway = true
-  enable_vpn_gateway = true
+  enable_nat_gateway = false
+  enable_vpn_gateway = false
 
   default_vpc_enable_dns_hostnames = true
-  default_vpc_enable_dns_support = true
+  default_vpc_enable_dns_support   = true
 
   tags = {
     Environment = "dev"
-    Team = "DevOps"
+    Team        = "DevOps"
   }
 }
