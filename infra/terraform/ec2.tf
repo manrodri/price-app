@@ -22,6 +22,11 @@ resource "aws_instance" "nginx" {
     destination = "/home/ubuntu/mongo.sh"
   }
 
+  provisioner "file" {
+    source = "templates/price-service.service"
+    destination = "/home/ubuntu/price-service.service"
+  }
+
    provisioner "file" {
     source = "templates/price-app.sh"
     destination = "/home/ubuntu/price-app.sh"
