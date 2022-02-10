@@ -1,1 +1,16 @@
-# todo
+[Unit]
+Description=uWSCI Pricing service
+
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/var/www/html/price-service
+EnvironmentFile=/var/www/html/price-service/.env
+ExecStart=/usr/bin/uwsgi --master --emperor uwsgi.ini --die-on-term -uid ubuntu -gui ubuntu logto /var/log/price-service/emperor.log
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target
