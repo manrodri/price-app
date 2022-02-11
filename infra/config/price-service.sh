@@ -11,10 +11,13 @@ sudo mkdir ${LOG_DIR};
 sudo chown ubuntu:ubuntu ${LOG_DIR}
 
 cd ${WORK_DIR}
-git clone --depth 1  ${REPO_URL}
+git clone --depth 1  ${REPO_URL} .
 
 # Install python, pipenv, nginx and dependencies
-sudo apt-get update; sudo apt install -y python3 pipenv nginx
-cd ${WORK_DIR}/price-of-chair-deployment
-pipenv install
+sudo apt-get update; sudo apt install -y python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools python3-venv nginx
+
+python3 -m venv venv
+
+
+
 

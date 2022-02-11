@@ -14,12 +14,13 @@ sudo apt install -y software-properties-common
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt instal -y build-essential python3.7-dev python3-pip python3.7
 
-sudo apt-get update; sudo apt install -y pipenv nginx uwsgi
-
+sudo apt install -y python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools
 cd ${WORK_DIR}; git clone ${REPOSITORY_URL} .
 
 # install dependencies and create venv
-pip install -r requirements.txt
+python3 -m venv venv
+source ./venv/bin/activate
+
 
 
 

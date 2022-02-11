@@ -27,6 +27,21 @@ resource "aws_instance" "nginx" {
     destination = "/home/ubuntu/price-service.service"
   }
 
+  provisioner "file" {
+    source = "templates/nginx.sh"
+    destination = "/home/ubuntu/nginx.sh"
+  }
+
+  provisioner "file" {
+    source = "templates/price-service.conf"
+    destination = "/home/ubuntu/price-service.conf"
+  }
+
+  provisioner "file" {
+    source = "templates/environment_file.sh"
+    destination = "/home/ubuntu/environment_file.sh"
+  }
+
    provisioner "file" {
     source = "templates/price-app.sh"
     destination = "/home/ubuntu/price-app.sh"
