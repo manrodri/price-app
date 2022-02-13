@@ -38,13 +38,18 @@ resource "aws_instance" "nginx" {
   }
 
   provisioner "file" {
-    source = "templates/environment_file.sh"
-    destination = "/home/ubuntu/environment_file.sh"
+    source = "templates/env.conf"
+    destination = "/home/ubuntu/env.conf"
   }
 
    provisioner "file" {
     source = "templates/price-app.sh"
     destination = "/home/ubuntu/price-app.sh"
+  }
+
+  provisioner "file" {
+    source = "templates/deployment.sh"
+    destination = "/home/ubuntu/deployment.sh"
   }
 
   tags = merge(local.common_tags, { Name = "${local.common_tags.Environment}-nginx${count.index + 1}" })

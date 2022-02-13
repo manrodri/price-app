@@ -6,7 +6,6 @@ User=ubuntu
 Group=www-data
 WorkingDirectory=/var/www/html/price-service
 EnvironmentFile=/var/www/html/price-service/env.conf
-Environment="PATH=/var/www/html/price-service/venv/bin"
 ExecStart=/usr/bin/uwsgi --init /var/www/html/price-service/uwsgi.ini
 Restart=always
 KillSignal=SIGQUIT
