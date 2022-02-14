@@ -1,0 +1,12 @@
+[
+  {"_id":"8f9a8d106afd4098820091e276b9a48b",
+  "email":"lolo.edinburgh@gmail.com",
+  "password":"$pbkdf2-sha512$25000$kbKWUqrVGuO8F0IoJWQsxQ$6VBTKG8UFosdQJVRfuqP1Kr9GearLHrvBLajSPa87X80N1Dwi6std4SukVaAtQ1D7qKbp3fX8gYp3.SIjBuw1A"
+},
+  {"_id":"8f9a8d106afd4098820091e276b9a48c",
+  "email":"foo@bar.com",
+  "password":"$pbkdf2-sha512$25000$kbKWUqrVGuO8F0IoJWQsxQ$6VBTKG8UFosdQJVRfuqP1Kr9GearLHrvBLajSPa87X80N1Dwi6std4SukVaAtQ1D7qKbp3fX8gYp3.SIjBuw1A"
+}
+]
+
+

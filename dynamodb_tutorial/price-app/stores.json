@@ -1,0 +1,11 @@
+[
+  {
+    "_id": "6f525e5c790b46ce9f90050f0381cd05",
+    "name": "ebay",
+    "query": {
+      "class": "notranslate"
+    },
+    "tag_name": "span",
+    "url_prefix": "https://www.ebay.co.uk/"
+  }
+]
