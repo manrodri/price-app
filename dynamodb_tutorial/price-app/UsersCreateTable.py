@@ -3,8 +3,9 @@ import boto3
 session = boto3.Session(profile_name='acg')
 
 
-def create_user_table():
-    dynamodb = session.resource('dynamodb')
+def create_user_table(dynamodb=None):
+    if not dynamodb:
+        dynamodb = boto3.resource('dynamodb', endpoint_url="http://localhost:8004")
     table = dynamodb.create_table(
         TableName='Users',
         KeySchema=[
