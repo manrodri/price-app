@@ -1,19 +1,20 @@
 import boto3
 
-session = boto3.Session(profile_name='acg')
+session = boto3.Session(profile_name='jenkins')
 
 
-def create_alert_table():
-    dynamodb = session.resource('dynamodb')
+def create_alert_table(dynamodb=None):
+    if not dynamodb:
+        dynamodb = session.resource('dynamodb', endpoint_url='http://localhost:8004')
     table = dynamodb.create_table(
         TableName='Alerts',
         KeySchema=[
             {
-                'AttributeName': '_id',
+                'AttributeName': 'user_email',
                 'KeyType': 'HASH'  # Partition key
             },
             {
-                'AttributeName': 'user_email',
+                'AttributeName': '_id',
                 'KeyType': 'RANGE'  # Sort key
             },
         ],
@@ -37,5 +38,5 @@ def create_alert_table():
 
 
 if __name__ == '__main__':
-    alert_table = create_alert_table()
+    alert_table = create_alert_table(session.resource('dynamodb'))
     print("Table status:", alert_table.table_status)

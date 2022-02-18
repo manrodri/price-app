@@ -1,3 +1,9 @@
 [
-  {"_id":"5535b6290e5e4667b7c690d867deaeb4","item_id":"f5f7a538bb5240e6ad0db1ece12930e5","name":"Honda Civic Type R","price_limit":5000,"user_email":"lolo.edinburgh@gmail.com"}
+  {
+    "_id": "5535b6290e5e4667b7c690d867deaeb4",
+    "item_id": "f5f7a538bb5240e6ad0db1ece12930e5",
+    "name": "Honda Civic Type R",
+    "price_limit": 5000,
+    "user_email": "lolo.edinburgh@gmail.com"
+  }
 ]
