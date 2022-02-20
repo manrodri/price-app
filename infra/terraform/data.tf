@@ -5,11 +5,11 @@ data "aws_availability_zones" "available" {
 ########
 # DNS
 #######
-data "aws_route53_zone" "public" {
-  name         = var.demo_dns_zone
-  private_zone = false
-
-}
+//data "aws_route53_zone" "public" {
+//  name         = var.demo_dns_zone
+//  private_zone = false
+//
+//}
 
 
 data "aws_key_pair" "example" {

@@ -3,7 +3,7 @@
 ##################################################################################
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~>2.0"
+  version = "3.12.0"
 
   name = "${local.common_tags["project_name"]}-${terraform.workspace}}"
 
