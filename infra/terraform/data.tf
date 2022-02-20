@@ -19,11 +19,23 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-resource "aws_instance" "web" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.small"
+data "aws_ami" "aws-linux" {
+  most_recent = true
+  owners      = ["amazon"]
 
-  tags = {
-    Name = "${terraform.workspace}-${var.project_name}"
+  filter {
+    name   = "name"
+    values = ["amzn-ami-hvm*"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
   }
 }
+
