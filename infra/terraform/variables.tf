@@ -1,15 +1,6 @@
-variable "profile" {
+variable "project_name" {
   type    = string
-  default = "devops"
-}
-variable "region" {
-  type    = string
-  default = "eu-west-1"
-}
-
-// networking
-variable "cidr_block" {
-  type = map(string)
+  default = "price-app"
 }
 
 variable "subnet_count" {
@@ -18,6 +9,25 @@ variable "subnet_count" {
 
 variable "private_subnets" {
   type = map(list(string))
+}
+
+variable "instance_count" {
+  type    = number
+  default = 1
+}
+
+variable "key_name" {
+  type = string
+  default = "test-key"
+}
+
+
+variable "private_key_path" {
+  type = string
+  default = "/Users/manuelrodriguez/Desktop/aws-keys/test-key.pem"
+}
+variable "domain_name" {
+  default = "manuelrodriguez.cloud"
 }
 
 variable "public_subnets" {

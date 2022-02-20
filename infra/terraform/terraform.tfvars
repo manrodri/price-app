@@ -9,7 +9,7 @@ subnet_count = {
 }
 
 cidr_block = {
-  "dev" = "10.4.0.0/16",
+  "dev" = "10.0.0.0/16",
    "no-ssl" = "10.0.0.0/16",
   "staging" = "10.1.0.0/16",
   "production" = "10.2.0.0/16"
@@ -17,8 +17,8 @@ cidr_block = {
 
 public_subnets = {
   "dev" = [
-    "10.4.1.0/24",
-    "10.4.2.0/24"],
+    "10.0.1.0/24",
+    "10.0.2.0/24"],
   "production" = [
     "10.2.1.0/24",
     "10.2.2.0/24",
@@ -35,8 +35,8 @@ public_subnets = {
 
 private_subnets = {
   "dev" = [
-    "10.4.3.0/24",
-    "10.4.4.0/24"],
+    "10.0.3.0/24",
+    "10.0.4.0/24"],
   "no-ssl" = [
     "10.0.3.0/24",
     "10.0.4.0/24"
@@ -57,8 +57,8 @@ private_subnets = {
 #########
 
 asg_instance_size = {
-  "dev" = "t2.micro",
-  "no-ssl": "t2.micro",
+  "dev" = "t2.small",
+  "no-ssl": "t2.small",
   "staging" = "t2.medium",
   "production" = "t2.medium"
 }
