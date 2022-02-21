@@ -1,3 +1,6 @@
-docker run -d -p 5000:5000 \
--e DB_CONNECTION_STRING="mongodb://127.0.0.1:27017/price-app" \
---name price-service docker.io/manrodri/price-service:0.1
+sudo docker built -t price-app .
+sudo docker run -d --name price -p 8080:80 \
+-e ADMIN='lolo.edinburgh@gmail.com' \
+-e MAILGUN_DOMAIN=sandboxd5230801a0404ef1b708a53dcc406251.mailgun.org \
+-e MAILGUN_KEY=1db88cc77bbf9a477d1ccba74006fe0d-c3d1d1eb-62b81253 \
+price-app

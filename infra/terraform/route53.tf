@@ -1,0 +1,15 @@
+data "aws_route53_zone" "selected" {
+  name         = "manuelrodriguez.cloud."
+  private_zone = false
+}
+
+resource "aws_route53_record" "www" {
+  zone_id = data.aws_route53_zone.selected.zone_id
+  name    = "www.${data.aws_route53_zone.selected.name}"
+  type    = "A"
+  alias {
+    name                   = aws_alb.webapp_alb.dns_name
+    zone_id                = aws_alb.webapp_alb.zone_id
+    evaluate_target_health = true
+  }
+}
