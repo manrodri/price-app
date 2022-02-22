@@ -35,7 +35,7 @@ resource "aws_iam_role" "asg" {
 
 #### S3 policies
 
-resource "aws_iam_role_policy" "asg" {
+resource "aws_iam_role_policy" "s3" {
   name = "${terraform.workspace}-price-app-s3"
   role = aws_iam_role.asg.id
 
@@ -51,6 +51,33 @@ resource "aws_iam_role_policy" "asg" {
         "Resource": [
                 "arn:aws:s3:::${local.bucket_name}",
                 "arn:aws:s3:::${local.bucket_name}/*"
+            ]
+      }
+    ]
+  }
+  EOF
+}
+
+
+
+resource "aws_iam_role_policy" "dynamo" {
+  name = "${terraform.workspace}-price-dynamo"
+  role = aws_iam_role.asg.id
+
+  policy = <<-EOF
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Action": [
+          "dynamodb:*"
+        ],
+        "Effect": "Allow",
+        "Resource": [
+               "arn:aws:dynamodb:${var.region}:${var.accountId}:table/${aws_dynamodb_table.alerts-table.name}",
+              "arn:aws:dynamodb:${var.region}:${var.accountId}:table/${aws_dynamodb_table.stores-table.name}",
+              "arn:aws:dynamodb:${var.region}:${var.accountId}:table/${aws_dynamodb_table.users-table.name}",
+              "arn:aws:dynamodb:${var.region}:${var.accountId}:table/${aws_dynamodb_table.items-table.name}"
             ]
       }
     ]

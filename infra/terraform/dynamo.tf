@@ -12,7 +12,7 @@ resource "aws_dynamodb_table" "users-table" {
 
 
 
-  tags = merge(local.common_tags, { Name = "${local.common_tags.environment}-users-table"})
+  tags = merge(local.common_tags, { Name = "${local.common_tags.environment}-users-table" })
 }
 
 resource "aws_dynamodb_table" "stores-table" {
@@ -21,7 +21,7 @@ resource "aws_dynamodb_table" "stores-table" {
   read_capacity  = 1
   write_capacity = 1
   hash_key       = "url_prefix"
-  range_key = "name"
+  range_key      = "name"
 
   attribute {
     name = "url_prefix"
@@ -34,17 +34,17 @@ resource "aws_dynamodb_table" "stores-table" {
   }
 
   global_secondary_index {
-    name               = "name-index"
-    hash_key           = "name"
-    write_capacity     = 1
-    read_capacity      = 1
-    projection_type    = "ALL"
+    name            = "name-index"
+    hash_key        = "name"
+    write_capacity  = 1
+    read_capacity   = 1
+    projection_type = "ALL"
   }
 
 
 
 
-  tags = merge(local.common_tags, { Name = "${local.common_tags.environment}-stores-table"})
+  tags = merge(local.common_tags, { Name = "${local.common_tags.environment}-stores-table" })
 }
 
 
@@ -54,7 +54,7 @@ resource "aws_dynamodb_table" "items-table" {
   read_capacity  = 1
   write_capacity = 1
   hash_key       = "_id"
-  range_key = "price"
+  range_key      = "price"
 
   attribute {
     name = "_id"
@@ -68,7 +68,7 @@ resource "aws_dynamodb_table" "items-table" {
 
 
 
-  tags = merge(local.common_tags, { Name = "${local.common_tags.environment}-items-table"})
+  tags = merge(local.common_tags, { Name = "${local.common_tags.environment}-items-table" })
 }
 
 
@@ -78,7 +78,7 @@ resource "aws_dynamodb_table" "alerts-table" {
   read_capacity  = 1
   write_capacity = 1
   hash_key       = "user_email"
-  range_key = "_id"
+  range_key      = "_id"
 
   attribute {
     name = "user_email"
@@ -93,5 +93,5 @@ resource "aws_dynamodb_table" "alerts-table" {
 
 
 
-  tags = merge(local.common_tags, { Name = "${local.common_tags.environment}-alerts-table"})
+  tags = merge(local.common_tags, { Name = "${local.common_tags.environment}-alerts-table" })
 }

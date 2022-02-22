@@ -3,9 +3,19 @@ variable "project_name" {
   default = "price-app"
 }
 
+variable "accountId" {
+  type = string
+}
+
+variable "region" {
+  type    = string
+  default = "us-east-1"
+}
+
 variable "subnet_count" {
   type = map(number)
 }
+
 
 variable "private_subnets" {
   type = map(list(string))
@@ -17,13 +27,13 @@ variable "instance_count" {
 }
 
 variable "key_name" {
-  type = string
+  type    = string
   default = "test-key"
 }
 
 
 variable "private_key_path" {
-  type = string
+  type    = string
   default = "/Users/manuelrodriguez/Desktop/aws-keys/test-key.pem"
 }
 variable "domain_name" {
@@ -38,13 +48,13 @@ variable "public_subnets" {
 # dns
 ######
 variable "demo_dns_zone" {
-  type = string
+  type    = string
   default = "soydecai.xyz"
 
 }
 
 variable "demo_dns_name" {
-  type = string
+  type    = string
   default = "myapp"
 }
 

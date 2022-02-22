@@ -6,7 +6,8 @@ resource "aws_launch_configuration" "webapp_lc" {
   name_prefix   = "${terraform.workspace}-demo-lc"
   image_id      = data.aws_ami.ubuntu.image_id
   instance_type = var.asg_instance_size[terraform.workspace]
-  key_name = var.key
+  key_name      = var.key
+  iam_instance_profile = aws_iam_instance_profile.asg.name
 
   security_groups = [
     aws_security_group.webapp_http_inbound_sg.id,
@@ -43,7 +44,7 @@ resource "aws_autoscaling_group" "webapp_asg" {
 
 resource "aws_autoscaling_attachment" "webapp_asg_attachment" {
   autoscaling_group_name = aws_autoscaling_group.webapp_asg.id
-  alb_target_group_arn = aws_alb_target_group.webapp_alb_tg.arn
+  alb_target_group_arn   = aws_alb_target_group.webapp_alb_tg.arn
 }
 
 
