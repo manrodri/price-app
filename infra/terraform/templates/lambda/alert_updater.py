@@ -6,10 +6,15 @@ from boto3.dynamodb.conditions import Key
 from botocore.exceptions import ClientError
 import requests
 from bs4 import BeautifulSoup
+import logging
 
 import boto3
 
 from ses import Ses
+
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 # all I need is to get Alerts from dynamo and send message
 
@@ -47,16 +52,26 @@ def all_alerts():
         print(e.response['Error']['Message'])
         raise ClientError
 
+    logger.info(f"alerts: {response['Items']}")
+
     return response['Items']
 
 
+#todo not working when running in lambda environment
 def load_item_price(item_id):
+    logger.info(f"item_id: {item_id}")
     item = get_item(item_id)
+    logger.info(f"item: {item}")
 
     request = requests.get(item["url"])
     content = request.content
+    logger.info(f"content: {content}")
+
+    # query: has to be a dict? what is comming from dynamo is a string
+
     soup = BeautifulSoup(content, "html.parser")
     element = soup.find(item["tag_name"], item["query"])
+    logger.info(f"element: {element}")
     string_price = element.text.strip()
 
     pattern = re.compile(r"(\d+,?\d+\.\d+)")
@@ -68,6 +83,7 @@ def load_item_price(item_id):
 
 
 def notify_if_price_reached(alert):
+    logger.info(f"alert: {alert}")
     item_id = alert['item_id']
     item = get_item(item_id)
 
@@ -82,7 +98,7 @@ def notify_if_price_reached(alert):
         )
 
 
-def lambda_handler():
+def lambda_handler(event, context):
     alerts = all_alerts()
     for alert in alerts:
         load_item_price(alert['item_id'])

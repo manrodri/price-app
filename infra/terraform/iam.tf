@@ -74,10 +74,10 @@ resource "aws_iam_role_policy" "dynamo" {
         ],
         "Effect": "Allow",
         "Resource": [
-               "arn:aws:dynamodb:${var.region}:${var.accountId}:table/${aws_dynamodb_table.alerts-table.name}",
-              "arn:aws:dynamodb:${var.region}:${var.accountId}:table/${aws_dynamodb_table.stores-table.name}",
-              "arn:aws:dynamodb:${var.region}:${var.accountId}:table/${aws_dynamodb_table.users-table.name}",
-              "arn:aws:dynamodb:${var.region}:${var.accountId}:table/${aws_dynamodb_table.items-table.name}"
+               "arn:aws:dynamodb:${var.region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.alerts-table.name}",
+              "arn:aws:dynamodb:${var.region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.stores-table.name}",
+              "arn:aws:dynamodb:${var.region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.users-table.name}",
+              "arn:aws:dynamodb:${var.region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.items-table.name}"
             ]
       }
     ]

@@ -3,10 +3,6 @@ variable "project_name" {
   default = "price-app"
 }
 
-variable "accountId" {
-  type = string
-}
-
 variable "region" {
   type    = string
   default = "us-east-1"
@@ -90,4 +86,32 @@ locals {
     team         = "Cloud and Hosting"
     project_name = "demo-project"
   }
+}
+
+
+####
+# lambda
+######
+
+variable "sender" {
+  type = string
+  default = "man.rodri.barr@gmail.com"
+}
+
+variable "recipient" {
+  type = string
+  default = "lolo.edinburgh@gmail.com"
+}
+
+variable "subject" {
+  type = string
+  default = "test email"
+}
+
+variable "smtp_password" {
+  type = string
+}
+
+variable "smtp_username" {
+  type = string
 }

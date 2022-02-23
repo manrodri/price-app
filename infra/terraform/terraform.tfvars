@@ -1,8 +1,6 @@
 profile = "acg"
 region  = "us-east-1"
 
-accountId = "111165224112"
-
 subnet_count = {
   "dev"        = 2,
   "no-ssl"     = 2,
@@ -81,3 +79,10 @@ asg_min_size = {
 }
 
 key = "test-key"
+
+
+######
+# ses
+######
+smtp_password = "BLeLymGy7rdJ4WlZRDRiQSqThTbEGkcaVcZ+VwVZ11mt"
+smtp_username = "AKIAQZZXL6LH4NNY5VOI"

@@ -2,6 +2,8 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
+data "aws_caller_identity" "current" {}
+
 ########
 # DNS
 #######
@@ -14,6 +16,10 @@ data "aws_availability_zones" "available" {
 
 data "aws_key_pair" "example" {
   key_name = "test-key"
+
+}
+
+data "aws_subnets" "my_subnets" {
 
 }
 
