@@ -36,6 +36,15 @@ resource "aws_iam_role_policy" "lambda_policy" {
                "arn:aws:dynamodb:${var.region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.items-table.name}"
 
             ]
+      },
+      {
+        "Action": [
+          "ses:*"
+        ],
+        "Effect": "Allow",
+        "Resource": [
+               "*"
+            ]
       }
     ]
   }

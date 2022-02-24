@@ -1,3 +1,4 @@
+import json
 import os
 import re
 from typing import List
@@ -64,14 +65,14 @@ def load_item_price(item_id):
     logger.info(f"item: {item}")
 
     request = requests.get(item["url"])
+    # query: has to be a dict? what is coming from dynamo is a string
+    query = json.loads(item['query'])
     content = request.content
     logger.info(f"content: {content}")
 
-    # query: has to be a dict? what is comming from dynamo is a string
 
     soup = BeautifulSoup(content, "html.parser")
-    element = soup.find(item["tag_name"], item["query"])
-    logger.info(f"element: {element}")
+    element = soup.find(item["tag_name"], query)
     string_price = element.text.strip()
 
     pattern = re.compile(r"(\d+,?\d+\.\d+)")
@@ -79,30 +80,29 @@ def load_item_price(item_id):
     found_price = match.group(1)
     without_commas = found_price.replace(",", "")
     price = float(without_commas)
-    return price
+    return item
 
 
-def notify_if_price_reached(alert):
-    logger.info(f"alert: {alert}")
-    item_id = alert['item_id']
-    item = get_item(item_id)
+def notify_if_price_reached(alert, item):
 
     if float(item.get('price')) < float(alert.get('price_limit')):
         text = f"Item {item.get('url')} has reached a price under {alert.get('price_limit')}. Latest price: {item.get('price')}."
 
+        recipient = os.environ.get('RECIPIENT')
         Ses.send_email(
             sender=os.environ.get('SENDER'),
-            recipient=os.environ.get('RECIPIENT'),
+            recipient=recipient,
             subject=os.environ.get('SUBJECT'),
             text=text
         )
+        logger.info(f"email sent to: {recipient}")
 
 
 def lambda_handler(event, context):
     alerts = all_alerts()
     for alert in alerts:
-        load_item_price(alert['item_id'])
-        notify_if_price_reached()
+        item = load_item_price(alert['item_id'])
+        notify_if_price_reached(alert, item)
 
     if not alerts:
         print("No alerts have been created. Add an item and an alert to begin!")
