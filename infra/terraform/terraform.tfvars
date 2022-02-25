@@ -8,12 +8,12 @@ subnet_count = {
   "production" = 3
 }
 
-cidr_block = {
-  "dev"        = "10.0.0.0/16",
-  "no-ssl"     = "10.0.0.0/16",
-  "staging"    = "10.1.0.0/16",
-  "production" = "10.2.0.0/16"
-}
+//cidr_block = {
+//  "dev"        = "10.0.0.0/16",
+//  "no-ssl"     = "10.0.0.0/16",
+//  "staging"    = "10.1.0.0/16",
+//  "production" = "10.2.0.0/16"
+//}
 
 public_subnets = {
   "dev" = [
@@ -84,5 +84,5 @@ key = "test-key"
 ######
 # ses
 ######
-smtp_password = "BGTBIZU+czdpPpl5M1Y2L4s0ZJ1NBW2CTMtiTeGwbF6e"
-smtp_username = "AKIAVGGXMDTR2LNBBRUX"
+smtp_password = "BAgiwPSsybx1DmcvT8q4gmkleJQCGww2X6uP9DhL2Abp"
+smtp_username = "AKIAZUDYE43FNIDE6PVZ"
