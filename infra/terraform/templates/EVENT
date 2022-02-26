@@ -1,0 +1,23 @@
+{
+    'version': '1.0',
+    'resource': '/ses',
+    'path': '/ses_apigw_stage/ses',
+    'httpMethod': 'POST',
+    'headers':
+        {'Content-Length': '182', 'Content-Type': 'application/json', 'Host': 'ja587gntc8.execute-api.us-east-1.amazonaws.com', 'Postman-Token': '2d49e282-cf73-4db0-a741-64ebc7837eff', 'User-Agent': 'PostmanRuntime/7.29.0', 'X-Amzn-Trace-Id': 'Root=1-6219f6be-4e9730f6175133e33cad1a41', 'X-Forwarded-For': '92.0.160.57', 'X-Forwarded-Port': '443', 'X-Forwarded-Proto': 'https', 'accept': '*/*', 'accept-encoding': 'gzip, deflate, br', 'cache-control': 'no-cache'},
+     'multiValueHeaders':
+        {'Content-Length': ['182'], 'Content-Type': ['application/json'], 'Host': ['ja587gntc8.execute-api.us-east-1.amazonaws.com'], 'Postman-Token': ['2d49e282-cf73-4db0-a741-64ebc7837eff'], 'User-Agent': ['PostmanRuntime/7.29.0'], 'X-Amzn-Trace-Id': ['Root=1-6219f6be-4e9730f6175133e33cad1a41'], 'X-Forwarded-For': ['92.0.160.57'], 'X-Forwarded-Port': ['443'], 'X-Forwarded-Proto': ['https'], 'accept': ['*/*'], 'accept-encoding': ['gzip, deflate, br'], 'cache-control': ['no-cache']},
+     'queryStringParameters': None,
+     'multiValueQueryStringParameters': None,
+     'requestContext': {'accountId': '621995844078', 'apiId': 'ja587gntc8', 'domainName': 'ja587gntc8.execute-api.us-east-1.amazonaws.com', 'domainPrefix': 'ja587gntc8', 'extendedRequestId': 'OJN92gjGIAMEMHQ=', 'httpMethod': 'POST', 'identity': {'accessKey': None, 'accountId': None, 'caller': None, 'cognitoAmr': None, 'cognitoAuthenticationProvider': None, 'cognitoAuthenticationType': None, 'cognitoIdentityId': None, 'cognitoIdentityPoolId': None, 'principalOrgId': None, 'sourceIp': '92.0.160.57', 'user': None, 'userAgent': 'PostmanRuntime/7.29.0', 'userArn': None},
+     'path': '/ses_apigw_stage/ses',
+     'protocol': 'HTTP/1.1',
+     'requestId': 'OJN92gjGIAMEMHQ=',
+     'requestTime': '26/Feb/2022:09:45:34 +0000',
+     'requestTimeEpoch': 1645868734802,
+     'resourceId': 'POST /ses',
+     'resourcePath': '/ses', 'stage': 'ses_apigw_stage'},
+     'pathParameters': None,
+     'stageVariables': None,
+     'body': '{\n    "message": {\n        "sender": "man.rodri.barr@gmail.com",\n        "reciever": "lolo.edinburgh@gmail.com",\n        "text": "hello Manu",\n        "subject": "test email"\n    }\n}',
+     'isBase64Encoded': False}"

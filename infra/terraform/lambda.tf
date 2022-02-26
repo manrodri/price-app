@@ -76,33 +76,3 @@ resource "aws_lambda_function" "test_lambda" {
   }
 }
 
-resource "aws_lambda_function" "ses_lambda" {
-  filename      = "templates/lambda/ses_deployment.zip"
-  function_name = "ses_backend"
-  role          = aws_iam_role.iam_for_lambda.arn
-  handler       = "ses.lambda_handler"
-  timeout = 30
-
-  source_code_hash = filebase64sha256("templates/lambda/ses_deployment.zip")
-
-  runtime = "python3.7"
-
-  environment {
-    variables = {
-      region = var.region,
-      SENDER = var.sender,
-      RECIPIENT = var.recipient,
-      SUBJECT = var.subject
-      smtp_username = var.smtp_username
-      smtp_password = var.smtp_password
-
-    }
-
-  }
-}
-
-resource "aws_cloudwatch_log_group" "hello_world" {
-  name = "/aws/lambda/${aws_lambda_function.ses_lambda.function_name}"
-
-  retention_in_days = 30
-}

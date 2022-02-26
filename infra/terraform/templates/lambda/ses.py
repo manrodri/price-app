@@ -1,7 +1,12 @@
+import json
 import os
+import logging
 
 import boto3
 from botocore.exceptions import ClientError
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 
 class SesException(BaseException):
@@ -49,27 +54,40 @@ class Ses:
             )
         # Display an error if something goes wrong.
         except ClientError as e:
-            print(e.response['Error']['Message'])
+            logger.error(e.response['Error']['Message'])
+            return {
+            "statusCode": 400,
+            "body": e.response['Error']['Message'],
+            "headers": {
+                "Access-Control-Allow-Origin": "*"
+            }
+        }
         else:
-            print("Email sent! Message ID:"),
-            print(response['MessageId'])
+            logger.info("Email sent! Message ID:"),
+            logger.info(response['MessageId'])
             return response
 
 
 def lambda_handler(event, context):
     ses = Ses()
 
-    message = event['message']
+    logger.info(f"event: {event}")
+    body = json.loads(event['body'])
+
+    logger.info(f"body: {body}")
+
+    message = body['message']
 
     recipient = message['recipient']
     sender = message['sender']
     subject = message['subject']
     text = message['text']
 
-    response = ses.send_email(sender, recipient, subject, text)
+    ses.send_email(sender, recipient, subject, text)
+
     return {
         "statusCode": 200,
-        "body": f"Email sent! Message ID:  {response['MessageId']}",
+        "body": "Email sent!",
         "headers": {
             "Access-Control-Allow-Origin": "*"
         }

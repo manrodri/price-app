@@ -84,5 +84,5 @@ key = "test-key"
 ######
 # ses
 ######
-smtp_password = "BAgiwPSsybx1DmcvT8q4gmkleJQCGww2X6uP9DhL2Abp"
-smtp_username = "AKIAZUDYE43FNIDE6PVZ"
+smtp_password = "BMoFwfG7rFd1kMmb7B9+d5NbHJZdD13VTp5qR70s6CzP"
+smtp_username = "AKIAZBUOXMHXAAPIQAXT"
