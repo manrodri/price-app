@@ -29,6 +29,10 @@ variable "key_name" {
   default = "test-key"
 }
 
+variable "cidr_block" {
+  type = map(string)
+}
+
 
 variable "private_key_path" {
   type    = string

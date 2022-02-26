@@ -1,4 +1,4 @@
-profile = "acg"
+profile = "jenkins"
 region  = "us-east-1"
 
 subnet_count = {
@@ -8,12 +8,12 @@ subnet_count = {
   "production" = 3
 }
 
-//cidr_block = {
-//  "dev"        = "10.0.0.0/16",
-//  "no-ssl"     = "10.0.0.0/16",
-//  "staging"    = "10.1.0.0/16",
-//  "production" = "10.2.0.0/16"
-//}
+cidr_block = {
+  "dev"        = "10.0.0.0/16",
+  "no-ssl"     = "10.0.0.0/16",
+  "staging"    = "10.1.0.0/16",
+  "production" = "10.2.0.0/16"
+}
 
 public_subnets = {
   "dev" = [

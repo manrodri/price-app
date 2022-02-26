@@ -7,7 +7,7 @@ module "vpc" {
 
   name = "${local.common_tags["project_name"]}-${terraform.workspace}}"
 
-  cidr            = "10.0.0.0/16"
+  cidr            = var.cidr_block[terraform.workspace]
   azs             = slice(data.aws_availability_zones.available.names, 0, var.subnet_count[terraform.workspace]) // slice extracts some consecutive elements from within a list. slice(list, startindex, endindex)
   private_subnets = var.private_subnets[terraform.workspace]
   public_subnets  = var.public_subnets[terraform.workspace]
