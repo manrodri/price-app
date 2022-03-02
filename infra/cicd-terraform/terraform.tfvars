@@ -1,0 +1,5 @@
+repository_name = "price-of-chair-deployment"
+repository_owner = "manrodri"
+repository_branch = "docker"
+secret_name = "remoteRepositorieKeys"
+repository_url = "https://github.com/manrodri/price-of-chair-deployment.git"
