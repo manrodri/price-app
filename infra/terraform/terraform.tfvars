@@ -79,6 +79,10 @@ asg_min_size = {
 }
 
 key = "test-key"
+repository_name = "price-of-chair-deployment"
+host_port = 80
+container_port = 80
+image = "manrodri/price-of-chair-deployment:c4b672d"
 
 
 ######

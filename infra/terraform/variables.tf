@@ -85,6 +85,24 @@ variable "key" {
   type = string
 }
 
+variable "cluster_name" {
+  type = string
+  default = "fargate_cluster"
+}
+
+variable "image" {
+  type = string
+}
+
+variable "container_port" {
+  type = number
+  default = 80
+}
+
+variable "host_port" {
+  type = number
+  default = 80
+}
 
 locals {
   common_tags = {

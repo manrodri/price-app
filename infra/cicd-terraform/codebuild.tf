@@ -64,23 +64,19 @@ resource "aws_codebuild_project" "example" {
 
     environment_variable {
       name  = "DOCKER_USERNAME"
-      value = jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["Docker_usermane"]
+      value = data.aws_ssm_parameter.docker_username.value
       type = "SECRETS_MANAGER"
     }
     environment_variable {
       name  = "DOCKER_PASSWORD"
-      value = jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["Docker_password"]
+      value = data.aws_ssm_parameter.docker_password.value
       type = "SECRETS_MANAGER"
     }
     environment_variable {
       name  = "IMAGE_REPO_NAME"
       value = var.repository_name
     }
-    environment_variable {
-      name  = "DB_CONNECTION_STRING"
-      value = jsondecode(data.aws_secretsmanager_secret_version.creds.secret_string)["DB_CONNECTION_STRING"]
-      type = "SECRETS_MANAGER"
-    }
+
   }
 
   logs_config {
