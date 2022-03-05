@@ -3,11 +3,12 @@ variable "project_name" {
   default = "price-app"
 }
 
-variable "profile" {}
+variable "profile" {
+  type = string
+}
 
 variable "region" {
   type    = string
-  default = "us-east-1"
 }
 
 variable "subnet_count" {
@@ -105,11 +106,17 @@ variable "host_port" {
 }
 
 locals {
+  only_in_acg_mapping = {
+    dev = 0
+    acg = 1
+  }
   common_tags = {
     environment  = terraform.workspace
     team         = "Cloud and Hosting"
     project_name = "demo-project"
   }
+
+  only_in_acg = local.only_in_acg_mapping[terraform.workspace]
 }
 
 
